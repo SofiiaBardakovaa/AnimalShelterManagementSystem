@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj": {}
+    "d:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj": {}
   },
   "projects": {
-    "D:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj": {
+    "d:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj",
+        "projectUniqueName": "d:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj",
         "projectName": "AnimalShelter.Api",
-        "projectPath": "D:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj",
+        "projectPath": "d:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj",
         "packagesPath": "C:\\Users\\snpn4\\.nuget\\packages\\",
-        "outputPath": "D:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\obj\\",
+        "outputPath": "d:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

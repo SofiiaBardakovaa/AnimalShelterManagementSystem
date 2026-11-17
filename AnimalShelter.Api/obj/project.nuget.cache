@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WagtTe28WAs=",
+  "dgSpecHash": "uXVjzuuOpBI=",
   "success": true,
-  "projectFilePath": "D:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj",
+  "projectFilePath": "d:\\university\\3_course_1st_semester\\Server-side_database_solutions\\AnimalShelterApp\\AnimalShelterManagementSystem\\AnimalShelter.Api\\AnimalShelter.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\snpn4\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.11\\microsoft.aspnetcore.openapi.9.0.11.nupkg.sha512",
     "C:\\Users\\snpn4\\.nuget\\packages\\microsoft.bcl.cryptography\\9.0.21\\microsoft.bcl.cryptography.9.0.21.nupkg.sha512",
