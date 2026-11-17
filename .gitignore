@@ -31,3 +31,17 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# .NET
+**/bin/
+**/obj/
+
+# Node.js
+**/node_modules/
+**/dist/
+
+# Local configuration
+**/appsettings.Development.json
+.env
+.env.*
+!.env.example
