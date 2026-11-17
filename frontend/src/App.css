@@ -1,0 +1,971 @@
+#root {
+    min-height: 100vh;
+    width: 100%;
+}
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7f5;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    min-height: 100vh;
+    background: #183c32;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 18px;
+    box-sizing: border-box;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px;
+    margin-bottom: 55px;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    background: #d8eee2;
+    color: #183c32;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+.sidebar-brand h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.sidebar-brand p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #b8cec4;
+}
+
+.sidebar-label {
+    color: #91afa1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding-left: 12px;
+    margin-bottom: 12px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    padding: 13px 14px;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    color: #d1e0d8;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: #285344;
+    color: white;
+}
+
+.nav-item.active {
+    background: #d8eee2;
+    color: #183c32;
+    font-weight: 600;
+}
+
+.nav-icon {
+    width: 22px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 18px 10px 5px;
+    border-top: 1px solid #426254;
+}
+
+.sidebar-footer p {
+    margin: 0 0 5px;
+    font-size: 12px;
+    color: #e2eee8;
+}
+
+.sidebar-footer span {
+    font-size: 11px;
+    color: #91afa1;
+}
+
+/* Main content */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.header {
+    height: 105px;
+    padding: 0 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #e8ece9;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 25px;
+    color: #203c32;
+}
+
+.header-text p {
+    margin: 7px 0 0;
+    color: #87948c;
+    font-size: 13px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #60746a;
+    font-size: 13px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #39ad70;
+}
+
+.user-avatar {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #d8eee2;
+    color: #183c32;
+    font-weight: 700;
+}
+
+.page-content {
+    padding: 20px 38px 32px;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 75px;
+        min-width: 75px;
+        padding: 20px 8px;
+    }
+
+    .sidebar-brand {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .sidebar-brand div,
+    .sidebar-label,
+    .nav-item span:last-child,
+    .sidebar-footer {
+        display: none;
+    }
+
+    .nav-item {
+        justify-content: center;
+        padding: 13px 5px;
+    }
+
+    .header {
+        padding: 0 18px;
+    }
+
+    .page-content {
+        padding: 22px 16px;
+    }
+
+    .header-status {
+        display: none;
+    }
+}
+
+/* Dashboard */
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.welcome-section h2 {
+    margin: 0 0 8px;
+    font-size: 23px;
+    color: #203c32;
+}
+
+.welcome-section p {
+    margin: 0;
+    color: #87948c;
+    font-size: 14px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e8ece9;
+    border-radius: 13px;
+    padding: 22px;
+    box-shadow: 0 2px 8px rgba(30, 60, 45, 0.03);
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    margin-bottom: 17px;
+}
+
+.stat-icon.green {
+    background: #e2f1e8;
+}
+
+.stat-icon.blue {
+    background: #e8edf8;
+}
+
+.stat-icon.orange {
+    background: #f8eee1;
+}
+
+.stat-icon.purple {
+    background: #f2e9f5;
+}
+
+.stat-card p {
+    color: #718078;
+    font-size: 13px;
+    margin: 0 0 8px;
+}
+
+.stat-card h3 {
+    color: #203c32;
+    font-size: 28px;
+    margin: 0 0 7px;
+}
+
+.stat-card > span {
+    color: #98a39c;
+    font-size: 11px;
+}
+
+.recent-section {
+    background: #ffffff;
+    border: 1px solid #e8ece9;
+    border-radius: 13px;
+    padding: 24px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    color: #203c32;
+    font-size: 18px;
+    margin: 0 0 6px;
+}
+
+.section-heading p {
+    color: #87948c;
+    font-size: 13px;
+    margin: 0;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.animals-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.animals-table th {
+    padding: 13px 12px;
+    color: #87948c;
+    font-weight: 600;
+    background: #f8faf8;
+    white-space: nowrap;
+}
+
+.animals-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #edf0ed;
+    color: #53645a;
+    white-space: nowrap;
+}
+
+.animals-table tr:last-child td {
+    border-bottom: none;
+}
+
+.animal-name {
+    color: #203c32 !important;
+    font-weight: 600;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #e2f1e8;
+    color: #34734e;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.error-message {
+    padding: 20px;
+    background: #fff0ef;
+    border-radius: 10px;
+    color: #a33b35;
+}
+
+@media (max-width: 1000px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animal selection */
+.animal-name-button {
+    border: none;
+    background: none;
+    color: #203c32;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+}
+
+.animal-name-button:hover {
+    color: #43845d;
+    text-decoration: underline;
+}
+
+.adopt-button,
+.submit-adoption-button {
+    border: none;
+    border-radius: 7px;
+    background: #2f6b4c;
+    color: white;
+    padding: 9px 15px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.adopt-button:hover,
+.submit-adoption-button:hover {
+    background: #24563c;
+}
+
+.unavailable-label {
+    color: #9a9f9b;
+    font-size: 12px;
+}
+
+/* Adoptions page */
+.adoptions-page {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.adoptions-heading h2 {
+    margin: 0 0 7px;
+    color: #203c32;
+    font-size: 23px;
+}
+
+.adoptions-heading p {
+    margin: 0;
+    color: #87948c;
+    font-size: 13px;
+}
+
+.adoption-form-card {
+    max-width: 620px;
+    background: #fff;
+    border: 1px solid #e8ece9;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.adoption-form-title {
+    margin-bottom: 24px;
+}
+
+.adoption-form-title h3 {
+    margin: 0 0 7px;
+    color: #203c32;
+    font-size: 17px;
+}
+
+.adoption-form-title p {
+    margin: 0;
+    color: #87948c;
+    font-size: 13px;
+}
+
+.adoption-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-field label {
+    color: #405348;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-field input {
+    border: 1px solid #dfe7e1;
+    border-radius: 8px;
+    padding: 12px;
+    outline: none;
+    color: #263b32;
+    font-size: 13px;
+}
+
+.form-field input:focus {
+    border-color: #43845d;
+}
+
+.submit-adoption-button {
+    align-self: flex-start;
+    padding: 12px 20px;
+    font-size: 13px;
+}
+
+.submit-adoption-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-message {
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+}
+
+.form-message.error-message {
+    background: #fff0ef;
+    color: #a33e37;
+}
+
+.form-message.success-message {
+    background: #e8f5ec;
+    color: #34734e;
+}
+
+/* Animals cards layout */
+
+.animals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* =================================
+   ANIMAL CARDS - NEW DESIGN
+================================= */
+
+.animals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+.animal-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e6ece7;
+    border-radius: 17px;
+    box-shadow: 0 3px 12px rgba(32, 60, 50, 0.035);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.animal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(32, 60, 50, 0.09);
+}
+
+/* Card header and image */
+
+.animal-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 17px 19px 0;
+}
+
+.animal-id {
+    color: #829188;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.animal-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 155px;
+    margin: 14px 17px 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #edf5ef, #e2eee5);
+    font-size: 76px;
+    transition: background 0.25s ease;
+}
+
+.animal-card:hover .animal-card-icon {
+    background: linear-gradient(135deg, #e5f1e8, #dcebe0);
+}
+
+/* Animal name */
+
+.animal-card-info {
+    padding: 18px 19px 15px;
+}
+
+.animal-card-name {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #203c32;
+    font-family: inherit;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+}
+
+.animal-card-name:hover:not(:disabled) {
+    color: #43845d;
+}
+
+.animal-card-name:disabled {
+    cursor: default;
+}
+
+.animal-card-species {
+    margin: 5px 0 0;
+    color: #87948c;
+    font-size: 13px;
+}
+
+/* Animal details */
+
+.animal-card-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 17px 12px;
+    margin: 0 19px;
+    padding: 17px 0;
+    border-top: 1px solid #edf0ed;
+    border-bottom: 1px solid #edf0ed;
+}
+
+.animal-card-details div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.animal-card-details span {
+    color: #98a39c;
+    font-size: 11px;
+}
+
+.animal-card-details strong {
+    color: #405348;
+    font-size: 12px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* Notes */
+
+.animal-card-notes {
+    margin: 0;
+    padding: 14px 19px 0;
+    color: #829188;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Footer and adoption button */
+
+.animal-card-footer {
+    margin-top: auto;
+    padding: 17px 19px 19px;
+}
+
+.animal-card-footer .adopt-button {
+    width: 100%;
+    min-height: 42px;
+    border: none;
+    border-radius: 9px;
+    background: #2f6b4c;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+.animal-card-footer .adopt-button:hover {
+    background: #24563c;
+    transform: translateY(-1px);
+}
+
+.unavailable-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+    border-radius: 9px;
+    background: #f5f7f5;
+    color: #929d96;
+    font-size: 12px;
+}
+
+/* Status badges */
+
+.animal-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.animal-status.available {
+    background: #e5f2e8;
+    color: #34734e;
+}
+
+.animal-status.adopted {
+    background: #edf0f8;
+    color: #60749b;
+}
+
+.animal-status.long-term-stay {
+    background: #f8eee1;
+    color: #967044;
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+    .animals-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .animals-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .animal-card-icon {
+        height: 140px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .animals-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .animals-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .animals-page-heading {
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+/* Search and filters */
+
+.animals-filters {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #e8ece9;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 180px;
+    height: 44px;
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 0 13px;
+    background: #f8faf8;
+    border: 1px solid #e2e9e3;
+    border-radius: 8px;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.search-box:focus-within {
+    border-color: #6b987a;
+    box-shadow: 0 0 0 3px rgba(107, 152, 122, 0.12);
+}
+
+.search-icon {
+    color: #829188;
+    font-size: 23px;
+    line-height: 1;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #263b32;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.search-box input::placeholder {
+    color: #a0aaa3;
+}
+
+.clear-search {
+    border: none;
+    background: none;
+    color: #829188;
+    font-size: 21px;
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+.filter-select {
+    width: 155px;
+    min-width: 130px;
+    height: 44px;
+    padding: 0 32px 0 12px;
+    border: 1px solid #e2e9e3;
+    border-radius: 8px;
+    background-color: #f8faf8;
+    color: #405348;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    border-color: #6b987a;
+}
+
+.reset-filters {
+    height: 44px;
+    padding: 0 15px;
+    border: 1px solid #dfe8e1;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #54745e;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.reset-filters:hover {
+    background: #edf4ee;
+}
+
+@media (max-width: 850px) {
+    .animals-filters {
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        flex-basis: 100%;
+    }
+
+    .filter-select {
+        flex: 1;
+    }
+}
+
+@media (max-width: 500px) {
+    .filter-select {
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+    .reset-filters {
+        width: 100%;
+    }
+}
+
+/* Animals page heading */
+
+.animals-page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.animals-page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.animals-page-heading h2 {
+    margin: 0 0 7px;
+    color: #203c32;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.animals-page-heading p {
+    margin: 0;
+    color: #87948c;
+    font-size: 13px;
+}
+
+.animals-total {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 17px;
+    background: #ffffff;
+    border: 1px solid #e5ebe6;
+    border-radius: 10px;
+}
+
+.animals-total span {
+    color: #718078;
+    font-size: 12px;
+}
+
+.animals-total strong {
+    color: #24563c;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+/* Results counter */
+
+.animals-results {
+    color: #87948c;
+    font-size: 12px;
+    margin-top: -4px;
+}
+
+.animals-results strong {
+    color: #405348;
+    font-weight: 700;
+}
