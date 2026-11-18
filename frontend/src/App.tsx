@@ -4,10 +4,16 @@ import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Animals from "./pages/Animals";
 import Adoptions from "./pages/Adoptions";
+import Adopters from "./pages/Adopters";
 import AdditionalFeatures from "./pages/AdditionalFeatures";
 import "./App.css";
 
-export type Page = "Dashboard" | "Animals" | "Adoptions" | "AdditionalFeatures";
+export type Page =
+    | "Dashboard"
+    | "Animals"
+    | "Adoptions"
+    | "AdditionalFeatures"
+    | "Adopters";
 
 function App() {
     const [activePage, setActivePage] = useState<Page>("Dashboard");
@@ -47,6 +53,8 @@ function App() {
                         onAdoptionComplete={() => setSelectedAnimalId(null)}
                     />
                 );
+            case "Adopters":
+                return <Adopters />;
 
             case "AdditionalFeatures":
                 return <AdditionalFeatures />;

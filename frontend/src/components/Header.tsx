@@ -18,6 +18,10 @@ const pageInfo: Record<Page, { title: string; subtitle: string }> = {
     title: 'Adoptions',
     subtitle: 'Manage animal adoption records',
   },
+  Adopters: {
+    title: "Adopters",
+    subtitle: "Manage shelter adopters"
+},
   AdditionalFeatures: {
     title: 'Additional Features',
     subtitle: 'Explore additional features and their results',

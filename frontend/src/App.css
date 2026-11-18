@@ -1343,3 +1343,125 @@
         flex-direction: column;
     }
 }
+
+/* adopters */
+
+
+.adopters-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.adopters-page-header h2 {
+    margin: 0 0 6px;
+    color: #244b3d;
+}
+
+.adopters-page-header p {
+    margin: 0;
+    color: #82938a;
+}
+
+.adopters-count {
+    padding: 10px 16px;
+    background: #e2f0e7;
+    color: #286044;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.adopters-search {
+    margin-bottom: 24px;
+}
+
+.adopters-search input {
+    width: 100%;
+    max-width: 500px;
+    padding: 13px 16px;
+    border: 1px solid #dce5df;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.adopters-search input:focus {
+    border-color: #286044;
+}
+
+.adopters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px;
+}
+
+.adopter-card {
+    padding: 22px;
+    background: white;
+    border: 1px solid #e5ebe7;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(30, 60, 45, 0.05);
+}
+
+.adopter-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.adopter-avatar {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #dcefe4;
+    color: #245c40;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.adopter-id {
+    color: #82938a;
+    font-size: 12px;
+}
+
+.adopter-card h3 {
+    color: #244b3d;
+    margin: 0 0 20px;
+}
+
+.adopter-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.adopter-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.adopter-info span {
+    color: #82938a;
+    font-size: 12px;
+}
+
+.adopter-info strong {
+    color: #344d41;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .adopters-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

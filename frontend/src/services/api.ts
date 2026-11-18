@@ -39,6 +39,15 @@ export interface AvailableAnimal {
     notes: string | null;
 }
 
+export interface Adopter {
+    id: number;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string | null;
+    address: string;
+}
+
 export interface AdoptionRecord {
     id: number;
     animalId: number;
@@ -161,6 +170,16 @@ export async function getMedicalRecords(
 
     if (!response.ok) {
         throw new Error("Failed to fetch medical records");
+    }
+
+    return response.json();
+}
+
+export async function getAdopters(): Promise<Adopter[]> {
+    const response = await fetch(`${API_URL}/Adopters`);
+
+    if (!response.ok) {
+        throw new Error("Failed to load adopters");
     }
 
     return response.json();

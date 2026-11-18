@@ -9,6 +9,7 @@ const menuItems: { name: Page; label: string; icon: string }[] = [
     { name: "Dashboard", label: "Dashboard", icon: "⌂" },
     { name: "Animals", label: "Animals", icon: "🐾" },
     { name: "Adoptions", label: "Adoptions", icon: "♡" },
+    { name: "Adopters", label: "Adopters", icon: "👤" },
     { name: "AdditionalFeatures", label: "Additional Features", icon: "▤" },
 ];
 
