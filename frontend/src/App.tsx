@@ -1,57 +1,71 @@
-import { useState } from 'react'
-import Sidebar from './components/Sidebar'
-import Header from './components/Header'
-import Dashboard from './pages/Dashboard'
-import Animals from './pages/Animals'
-import Adoptions from './pages/Adoptions'
-import Functions from './pages/Functions'
-import './App.css'
+import { useEffect, useState } from "react";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import Dashboard from "./pages/Dashboard";
+import Animals from "./pages/Animals";
+import Adoptions from "./pages/Adoptions";
+import Functions from "./pages/Functions";
+import "./App.css";
 
-export type Page = 'Dashboard' | 'Animals' | 'Adoptions' | 'Functions'
+export type Page = "Dashboard" | "Animals" | "Adoptions" | "Functions";
 
 function App() {
-  const [activePage, setActivePage] = useState<Page>('Dashboard')
-  const [selectedAnimalId, setSelectedAnimalId] = useState<number | null>(null)
+    const [activePage, setActivePage] = useState<Page>("Dashboard");
+    const [selectedAnimalId, setSelectedAnimalId] = useState<number | null>(
+        null,
+    );
 
-  const handleAdopt = (animalId: number) => {
-    setSelectedAnimalId(animalId)
-    setActivePage('Adoptions')
-  }
+    const handleAdopt = (animalId: number) => {
+        setSelectedAnimalId(animalId);
+        setActivePage("Adoptions");
+    };
 
-  const renderPage = () => {
-    switch (activePage) {
-      case 'Dashboard':
-        return <Dashboard />
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
 
-      case 'Animals':
-        return <Animals onAdopt={handleAdopt} />
+        document.querySelector(".main-content")?.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }, [activePage]);
 
-      case 'Adoptions':
-        return (
-          <Adoptions
-            selectedAnimalId={selectedAnimalId}
-            onAdoptionComplete={() => setSelectedAnimalId(null)}
-          />
-        )
+    const renderPage = () => {
+        switch (activePage) {
+            case "Dashboard":
+                return <Dashboard />;
 
-      case 'Functions':
-        return <Functions />
+            case "Animals":
+                return <Animals onAdopt={handleAdopt} />;
 
-      default:
-        return <Dashboard />
-    }
-  }
+            case "Adoptions":
+                return (
+                    <Adoptions
+                        selectedAnimalId={selectedAnimalId}
+                        onAdoptionComplete={() => setSelectedAnimalId(null)}
+                    />
+                );
 
-  return (
-    <div className="app-layout">
-      <Sidebar activePage={activePage} onPageChange={setActivePage} />
+            case "Functions":
+                return <Functions />;
 
-      <main className="main-content">
-        <Header activePage={activePage} />
-        <div className="page-content">{renderPage()}</div>
-      </main>
-    </div>
-  )
+            default:
+                return <Dashboard />;
+        }
+    };
+
+    return (
+        <div className="app-layout">
+            <Sidebar activePage={activePage} onPageChange={setActivePage} />
+
+            <main className="main-content">
+                <Header activePage={activePage} />
+                <div className="page-content">{renderPage()}</div>
+            </main>
+        </div>
+    );
 }
 
-export default App
+export default App;
