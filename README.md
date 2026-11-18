@@ -1,26 +1,33 @@
 # Animal Shelter Management System
 
-A full-stack web application for managing an animal shelter. The system provides an interface for browsing animals, searching and filtering records, registering adoptions, and retrieving information from a Microsoft SQL Server database.
+A full-stack web application for managing an animal shelter. The system allows users to browse animal records, view adopters, register adoptions, manage related information, and execute database functions through a web interface.
+
+The application follows the REST architectural style and uses Microsoft SQL Server as its database.
 
 ## Features
 
 - **Dashboard** — displays key statistics about animals, shelters, and adoptions.
-- **Animals** — displays animal information using cards, with search and filtering by species and adoption status.
-- **Adoptions** — allows users to register an adoption by providing adopter information and selecting an animal.
-- **Database Functions** — provides an interface for executing database functions and displaying their results.
-- **REST API** — connects the frontend with the SQL Server database.
-- **Error Handling** — handles database exceptions and displays error messages to users.
+- **Animals** — displays animal information using cards and supports searching and filtering by species and adoption status.
+- **Adopters** — displays registered adopters and their contact information.
+- **Adoptions** — allows users to register new adoptions and view adoption records.
+- **Medical Records** — displays medical information associated with animals.
+- **Additional Features** — provides an interface for executing database functions:
+    - Count adopters by region using a scalar-valued function.
+    - Retrieve available animals by shelter using a table-valued function.
+- **REST API** — connects the frontend to the SQL Server database through HTTP requests.
+- **Error Handling** — handles SQL Server exceptions and displays error messages in the application.
 
 ## Technologies
 
-| Area | Technologies |
-|---|---|
-| Backend | C#, ASP.NET Core Web API, .NET 9 |
-| Database access | ADO.NET, Microsoft.Data.SqlClient |
-| Database | Microsoft SQL Server |
-| Frontend | React, TypeScript |
-| Build tool | Vite |
-| API documentation | Swagger / OpenAPI |
+| Area              | Technologies                      |
+| ----------------- | --------------------------------- |
+| Backend           | C#, ASP.NET Core Web API, .NET 9  |
+| Database Access   | ADO.NET, Microsoft.Data.SqlClient |
+| Database          | Microsoft SQL Server              |
+| Frontend          | React, TypeScript                 |
+| Build Tool        | Vite                              |
+| API Documentation | Swagger / OpenAPI                 |
+| Version Control   | Git, GitHub                       |
 
 ## Project Structure
 
@@ -29,11 +36,26 @@ AnimalShelterManagementSystem/
 │
 ├── AnimalShelter.Api/
 │   ├── Controllers/
+│   │   ├── AdoptersController.cs
+│   │   ├── AdoptionsController.cs
+│   │   ├── AnimalsController.cs
+│   │   ├── DiagnosticsController.cs
+│   │   ├── FunctionsController.cs
+│   │   └── MedicalRecordsController.cs
+│   │
 │   ├── Data/
+│   │   └── SqlConnectionFactory.cs
+│   │
 │   ├── Models/
+│   │   ├── AdoptionDto.cs
+│   │   ├── AnimalDto.cs
+│   │   ├── AvailableAnimalDto.cs
+│   │   └── CreateAdoptionDto.cs
+│   │
 │   ├── Properties/
 │   ├── Program.cs
 │   ├── appsettings.json
+│   ├── appsettings.Development.json
 │   └── AnimalShelter.Api.csproj
 │
 ├── database/
@@ -47,10 +69,28 @@ AnimalShelterManagementSystem/
 ├── frontend/
 │   ├── public/
 │   ├── src/
+│   │   ├── assets/
 │   │   ├── components/
+│   │   │   ├── AnimalTable.tsx
+│   │   │   ├── Header.tsx
+│   │   │   └── Sidebar.tsx
+│   │   │
 │   │   ├── pages/
+│   │   │   ├── AdditionalFeatures.tsx
+│   │   │   ├── Adopters.tsx
+│   │   │   ├── Adoptions.tsx
+│   │   │   ├── Animals.tsx
+│   │   │   └── Dashboard.tsx
+│   │   │
 │   │   ├── services/
-│   │   └── types/
+│   │   │   └── api.ts
+│   │   │
+│   │   ├── types/
+│   │   ├── App.css
+│   │   ├── App.tsx
+│   │   ├── index.css
+│   │   └── main.tsx
+│   │
 │   ├── package.json
 │   ├── index.html
 │   └── vite.config.ts
@@ -87,46 +127,46 @@ To create and configure the database:
 1. Open SQL Server Management Studio (SSMS).
 2. Connect to your SQL Server instance.
 3. Navigate to the `database` directory.
-4. Execute the following SQL scripts in order:
+4. Execute the SQL scripts in the following order:
 
-| Script | Description |
-|---|---|
-| `01_CreateDatabase.sql` | Creates the database |
-| `02_CreateTables.sql` | Creates database tables and relationships |
-| `03_InsertData.sql` | Inserts sample data |
-| `04_CreateProcedures.sql` | Creates stored procedures |
-| `05_CreateFunctions.sql` | Creates scalar and table-valued functions |
-| `06_CreateTriggers.sql` | Creates database triggers |
+| Script                    | Description                                      |
+| ------------------------- | ------------------------------------------------ |
+| `01_CreateDatabase.sql`   | Creates the database                             |
+| `02_CreateTables.sql`     | Creates tables and relationships                 |
+| `03_InsertData.sql`       | Inserts sample data                              |
+| `04_CreateProcedures.sql` | Creates stored procedures                        |
+| `05_CreateFunctions.sql`  | Creates scalar-valued and table-valued functions |
+| `06_CreateTriggers.sql`   | Creates database triggers                        |
 
 After executing all scripts, the database should be ready to use.
 
 ### 3. Configure the backend
 
-Navigate to the API project directory:
+Navigate to the backend directory:
 
 ```bash
 cd AnimalShelter.Api
 ```
 
-Create a file named `appsettings.Development.json` in this directory.
+Create a file named `appsettings.Development.json` in the `AnimalShelter.Api` directory.
 
 Add the following configuration:
 
 ```json
 {
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "ConnectionStrings": {
+        "AnimalShelterDb": "Server=YOUR_SERVER_NAME;Database=AnimalShelterDB;Integrated Security=True;TrustServerCertificate=True;"
     }
-  },
-  "ConnectionStrings": {
-    "AnimalShelterDb": "Server=YOUR_SERVER_NAME;Database=AnimalShelterDB;Integrated Security=True;TrustServerCertificate=True;"
-  }
 }
 ```
 
-Replace `YOUR_SERVER_NAME` with the name of your SQL Server instance.
+Replace `YOUR_SERVER_NAME` with your SQL Server instance name.
 
 For example:
 
@@ -140,7 +180,7 @@ Server=localhost\SQLEXPRESS
 
 Make sure you are in the `AnimalShelter.Api` directory.
 
-Restore dependencies:
+Restore the dependencies:
 
 ```bash
 dotnet restore
@@ -190,23 +230,26 @@ The frontend will be available at:
 http://localhost:5173
 ```
 
-Make sure the backend and SQL Server are running before using the application.
+Make sure SQL Server and the backend are running before using the application.
 
 ## API Endpoints
 
-| HTTP Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/Animals` | Retrieves all animals |
-| POST | `/api/Adoptions` | Registers a new adoption |
-| GET | `/api/Diagnostics/database` | Checks database connectivity |
-| GET | `/api/Functions/adopters-count` | Retrieves the number of adopters by region |
-| GET | `/api/Functions/available-animals/{shelterId}` | Retrieves available animals for a shelter |
-| GET | `/api/Functions/shelters-count` | Retrieves the number of shelters |
-| GET | `/api/Functions/adoptions-count` | Retrieves the number of adoptions |
+| HTTP Method | Endpoint                                        | Description                               |
+| ----------- | ----------------------------------------------- | ----------------------------------------- |
+| GET         | `/api/Animals`                                  | Retrieves all animals                     |
+| GET         | `/api/Adopters`                                 | Retrieves all adopters                    |
+| GET         | `/api/Adoptions`                                | Retrieves adoption records                |
+| POST        | `/api/Adoptions`                                | Registers a new adoption                  |
+| GET         | `/api/MedicalRecords/{animalId}`                | Retrieves medical records for an animal   |
+| GET         | `/api/Functions/adopters-count?region={region}` | Counts adopters by region                 |
+| GET         | `/api/Functions/available-animals/{shelterId}`  | Retrieves available animals for a shelter |
+| GET         | `/api/Functions/shelters-count`                 | Retrieves the total number of shelters    |
+| GET         | `/api/Functions/adoptions-count`                | Retrieves the total number of adoptions   |
+| GET         | `/api/Diagnostics/database`                     | Checks database connectivity              |
 
 ## Database Components
 
-The database contains the following main tables:
+The database contains the following tables:
 
 - `Shelters`
 - `Adopters`
@@ -214,30 +257,36 @@ The database contains the following main tables:
 - `Medical_Records`
 - `Adoptions`
 
-The project also uses:
+The application also uses the following database programming elements:
 
-- Stored procedures for inserting and validating adoption records.
-- Scalar-valued functions for retrieving statistics.
-- Table-valued functions for retrieving available animals.
-- Triggers for enforcing business rules and maintaining database consistency.
+- **Stored Procedures**
+    - `usp_insert_adoption` — registers a new animal adoption.
+- **Scalar-Valued Functions**
+    - `fn_CountAdoptersByRegion` — counts adopters based on the specified region.
+- **Table-Valued Functions**
+    - `fn_GetAvailableAnimalsByShelter` — returns available animals belonging to a specified shelter.
+- **Triggers** — enforce database rules and maintain data consistency.
 
 ## Error Handling
 
-The application handles SQL Server exceptions generated by database operations.
+The application handles SQL Server exceptions generated during database operations.
 
-For example, adoption registration includes validation to prevent:
-- Registering an adoption for a non-existing animal.
-- Registering an adoption for a non-existing adopter.
-- Adopting an animal that has already been adopted.
-- Providing an invalid adoption fee.
+For example, the `usp_insert_adoption` stored procedure uses custom SQL Server exceptions with `THROW` to validate adoption requests.
 
-Errors are returned by the backend API and displayed to the user.
+The procedure checks that:
+
+- The specified animal exists.
+- The specified adopter exists.
+- The animal has not already been adopted.
+- The adoption fee is not negative.
+
+When a database exception occurs, the backend catches the `SqlException` and returns an error response. The frontend displays the error message to the user.
 
 ## Author
 
 **Sofiia Bardakova**
 
-GitHub: [GitHub Profile](https://github.com/SofiiaBardakovaa)
+GitHub: [SofiiaBardakovaa](https://github.com/SofiiaBardakovaa)
 
 ## License
 
