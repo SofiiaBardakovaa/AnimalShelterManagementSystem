@@ -9,7 +9,7 @@ const menuItems: { name: Page; label: string; icon: string }[] = [
     { name: "Dashboard", label: "Dashboard", icon: "⌂" },
     { name: "Animals", label: "Animals", icon: "🐾" },
     { name: "Adoptions", label: "Adoptions", icon: "♡" },
-    { name: "Functions", label: "Database Functions", icon: "▤" },
+    { name: "AdditionalFeatures", label: "Additional Features", icon: "▤" },
 ];
 
 function Sidebar({ activePage, onPageChange }: SidebarProps) {

@@ -15,12 +15,12 @@ export interface Animal {
 }
 
 export interface MedicalRecord {
-  id: number
-  animalId: number
-  visitDate: string
-  diagnosis: string
-  treatment: string | null
-  notes: string | null
+    id: number;
+    animalId: number;
+    visitDate: string;
+    diagnosis: string;
+    treatment: string | null;
+    notes: string | null;
 }
 
 export interface Adoption {
@@ -40,16 +40,16 @@ export interface AvailableAnimal {
 }
 
 export interface AdoptionRecord {
-  id: number
-  animalId: number
-  animalName: string
-  species: string
-  adopterId: number
-  adopterName: string
-  shelterName: string
-  adoptionDate: string
-  fee: number
-  notes: string | null
+    id: number;
+    animalId: number;
+    animalName: string;
+    species: string;
+    adopterId: number;
+    adopterName: string;
+    shelterName: string;
+    adoptionDate: string;
+    fee: number;
+    notes: string | null;
 }
 
 // Отримання всіх тварин
@@ -145,25 +145,23 @@ export async function getAdoptionsCount(): Promise<number> {
 }
 
 export async function getAdoptions(): Promise<AdoptionRecord[]> {
-  const response = await fetch(`${API_URL}/Adoptions`)
+    const response = await fetch(`${API_URL}/Adoptions`);
 
-  if (!response.ok) {
-    throw new Error('Failed to load adoption records')
-  }
+    if (!response.ok) {
+        throw new Error("Failed to load adoption records");
+    }
 
-  return response.json()
+    return response.json();
 }
 
 export async function getMedicalRecords(
-  animalId: number
+    animalId: number,
 ): Promise<MedicalRecord[]> {
-  const response = await fetch(
-    `${API_URL}/MedicalRecords/${animalId}`
-  )
+    const response = await fetch(`${API_URL}/MedicalRecords/${animalId}`);
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch medical records')
-  }
+    if (!response.ok) {
+        throw new Error("Failed to fetch medical records");
+    }
 
-  return response.json()
+    return response.json();
 }

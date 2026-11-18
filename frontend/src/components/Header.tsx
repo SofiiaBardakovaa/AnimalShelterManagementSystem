@@ -18,9 +18,9 @@ const pageInfo: Record<Page, { title: string; subtitle: string }> = {
     title: 'Adoptions',
     subtitle: 'Manage animal adoption records',
   },
-  Functions: {
-    title: 'Database Functions',
-    subtitle: 'Explore database functions and their results',
+  AdditionalFeatures: {
+    title: 'Additional Features',
+    subtitle: 'Explore additional features and their results',
   },
 }
 

@@ -4,10 +4,10 @@ import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Animals from "./pages/Animals";
 import Adoptions from "./pages/Adoptions";
-import Functions from "./pages/Functions";
+import AdditionalFeatures from "./pages/AdditionalFeatures";
 import "./App.css";
 
-export type Page = "Dashboard" | "Animals" | "Adoptions" | "Functions";
+export type Page = "Dashboard" | "Animals" | "Adoptions" | "AdditionalFeatures";
 
 function App() {
     const [activePage, setActivePage] = useState<Page>("Dashboard");
@@ -48,8 +48,8 @@ function App() {
                     />
                 );
 
-            case "Functions":
-                return <Functions />;
+            case "AdditionalFeatures":
+                return <AdditionalFeatures />;
 
             default:
                 return <Dashboard />;
