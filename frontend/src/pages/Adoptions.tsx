@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import { createAdoption } from "../services/api";
+import { useCallback, useEffect, useState } from "react";
+import type { FormEvent } from "react";
+import { createAdoption, getAdoptions } from "../services/api";
+import type { AdoptionRecord } from "../services/api";
 
 interface AdoptionsProps {
     selectedAnimalId: number | null;
@@ -12,9 +14,37 @@ function Adoptions({ selectedAnimalId, onAdoptionComplete }: AdoptionsProps) {
     );
     const [adopterId, setAdopterId] = useState("");
     const [fee, setFee] = useState("0");
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+
+    // Adoption records
+    const [adoptions, setAdoptions] = useState<AdoptionRecord[]>([]);
+    const [loadingRecords, setLoadingRecords] = useState(true);
+    const [recordsError, setRecordsError] = useState("");
+
+    const loadAdoptions = useCallback(async () => {
+        setLoadingRecords(true);
+        setRecordsError("");
+
+        try {
+            const data = await getAdoptions();
+            setAdoptions(data);
+        } catch (err) {
+            setRecordsError(
+                err instanceof Error
+                    ? err.message
+                    : "Failed to load adoption records.",
+            );
+        } finally {
+            setLoadingRecords(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        loadAdoptions();
+    }, [loadAdoptions]);
 
     useEffect(() => {
         if (selectedAnimalId !== null) {
@@ -24,7 +54,7 @@ function Adoptions({ selectedAnimalId, onAdoptionComplete }: AdoptionsProps) {
         }
     }, [selectedAnimalId]);
 
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         setError("");
@@ -58,6 +88,10 @@ function Adoptions({ selectedAnimalId, onAdoptionComplete }: AdoptionsProps) {
             setAnimalId("");
             setAdopterId("");
             setFee("0");
+
+            // Refresh adoption records after successful creation
+            await loadAdoptions();
+
             onAdoptionComplete();
         } catch (err) {
             setError(
@@ -66,6 +100,10 @@ function Adoptions({ selectedAnimalId, onAdoptionComplete }: AdoptionsProps) {
         } finally {
             setLoading(false);
         }
+    }
+
+    function formatDate(date: string) {
+        return new Date(date).toLocaleDateString("en-GB");
     }
 
     return (
@@ -151,6 +189,83 @@ function Adoptions({ selectedAnimalId, onAdoptionComplete }: AdoptionsProps) {
                     </button>
                 </form>
             </div>
+
+            {/* Adoption records table */}
+            <section className="adoption-records-section">
+                <div className="adoption-records-heading">
+                    <div>
+                        <h3>Adoption Records</h3>
+                        <p>All registered animal adoptions</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="refresh-adoptions-button"
+                        onClick={loadAdoptions}
+                        disabled={loadingRecords}
+                    >
+                        {loadingRecords ? "Loading..." : "Refresh"}
+                    </button>
+                </div>
+
+                {recordsError && (
+                    <div className="form-message error-message">
+                        {recordsError}
+                    </div>
+                )}
+
+                {loadingRecords ? (
+                    <p className="adoption-records-message">
+                        Loading adoption records...
+                    </p>
+                ) : !recordsError && adoptions.length === 0 ? (
+                    <p className="adoption-records-message">
+                        No adoption records found.
+                    </p>
+                ) : !recordsError ? (
+                    <div className="adoption-table-wrapper">
+                        <table className="adoption-records-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Animal</th>
+                                    <th>Species</th>
+                                    <th>Adopter</th>
+                                    <th>Shelter</th>
+                                    <th>Adoption Date</th>
+                                    <th>Fee</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {adoptions.map((adoption) => (
+                                    <tr key={adoption.id}>
+                                        <td>#{adoption.id}</td>
+                                        <td className="adoption-animal-name">
+                                            {adoption.animalName}
+                                        </td>
+                                        <td>{adoption.species}</td>
+                                        <td>{adoption.adopterName}</td>
+                                        <td>{adoption.shelterName}</td>
+                                        <td>
+                                            {formatDate(adoption.adoptionDate)}
+                                        </td>
+                                        <td className="adoption-fee">
+                                            €{adoption.fee.toFixed(2)}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : null}
+
+                {!loadingRecords && !recordsError && adoptions.length > 0 && (
+                    <p className="adoption-records-count">
+                        Total records: {adoptions.length}
+                    </p>
+                )}
+            </section>
         </div>
     );
 }

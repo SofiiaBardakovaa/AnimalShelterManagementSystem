@@ -14,6 +14,15 @@ export interface Animal {
     shelterName: string;
 }
 
+export interface MedicalRecord {
+  id: number
+  animalId: number
+  visitDate: string
+  diagnosis: string
+  treatment: string | null
+  notes: string | null
+}
+
 export interface Adoption {
     animalId: number;
     adopterId: number;
@@ -28,6 +37,19 @@ export interface AvailableAnimal {
     gender: string;
     arrivalDate: string;
     notes: string | null;
+}
+
+export interface AdoptionRecord {
+  id: number
+  animalId: number
+  animalName: string
+  species: string
+  adopterId: number
+  adopterName: string
+  shelterName: string
+  adoptionDate: string
+  fee: number
+  notes: string | null
 }
 
 // Отримання всіх тварин
@@ -122,26 +144,25 @@ export async function getAdoptionsCount(): Promise<number> {
     return data.count;
 }
 
-// adoptions
-
-export interface AdoptionRecord {
-  id: number
-  animalId: number
-  animalName: string
-  species: string
-  adopterId: number
-  adopterName: string
-  shelterName: string
-  adoptionDate: string
-  fee: number
-  notes: string | null
-}
-
 export async function getAdoptions(): Promise<AdoptionRecord[]> {
   const response = await fetch(`${API_URL}/Adoptions`)
 
   if (!response.ok) {
     throw new Error('Failed to load adoption records')
+  }
+
+  return response.json()
+}
+
+export async function getMedicalRecords(
+  animalId: number
+): Promise<MedicalRecord[]> {
+  const response = await fetch(
+    `${API_URL}/MedicalRecords/${animalId}`
+  )
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch medical records')
   }
 
   return response.json()

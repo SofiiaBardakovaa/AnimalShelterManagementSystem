@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAnimals, type Animal } from "../services/api";
+import {
+    getAnimals,
+    getMedicalRecords,
+    type Animal,
+    type MedicalRecord,
+} from "../services/api";
 
 interface AnimalsProps {
     onAdopt: (animalId: number) => void;
@@ -13,6 +18,29 @@ function Animals({ onAdopt }: AnimalsProps) {
     const [selectedSpecies, setSelectedSpecies] = useState("All");
     const [selectedStatus, setSelectedStatus] = useState("All");
     const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
+    const [medicalRecords, setMedicalRecords] = useState<MedicalRecord[]>([]);
+    const [medicalLoading, setMedicalLoading] = useState(false);
+    const [medicalError, setMedicalError] = useState("");
+
+    const openAnimalDetails = async (animal: Animal) => {
+        setSelectedAnimal(animal);
+        setMedicalRecords([]);
+        setMedicalError("");
+        setMedicalLoading(true);
+
+        try {
+            const records = await getMedicalRecords(animal.id);
+            setMedicalRecords(records);
+        } catch (err) {
+            setMedicalError(
+                err instanceof Error
+                    ? err.message
+                    : "Failed to load medical records",
+            );
+        } finally {
+            setMedicalLoading(false);
+        }
+    };
 
     useEffect(() => {
         async function loadAnimals() {
@@ -185,7 +213,7 @@ function Animals({ onAdopt }: AnimalsProps) {
                                     <button
                                         className="animal-card-name"
                                         onClick={() =>
-                                            setSelectedAnimal(animal)
+                                            openAnimalDetails(animal)
                                         }
                                         type="button"
                                     >
@@ -291,11 +319,6 @@ function Animals({ onAdopt }: AnimalsProps) {
 
                                 <div className="animal-detail-grid">
                                     <div>
-                                        <span>Animal ID</span>
-                                        <strong>#{selectedAnimal.id}</strong>
-                                    </div>
-
-                                    <div>
                                         <span>Name</span>
                                         <strong>{selectedAnimal.name}</strong>
                                     </div>
@@ -340,13 +363,6 @@ function Animals({ onAdopt }: AnimalsProps) {
                                         </strong>
                                     </div>
 
-                                    <div>
-                                        <span>Shelter ID</span>
-                                        <strong>
-                                            #{selectedAnimal.shelterId}
-                                        </strong>
-                                    </div>
-
                                     <div className="animal-detail-full">
                                         <span>Shelter</span>
                                         <strong>
@@ -362,6 +378,62 @@ function Animals({ onAdopt }: AnimalsProps) {
                                         </strong>
                                     </div>
                                 </div>
+                            </section>
+
+                            <section className="medical-records-section">
+                                <h3>Medical Records</h3>
+
+                                {medicalLoading ? (
+                                    <p>Loading medical records...</p>
+                                ) : medicalError ? (
+                                    <p className="medical-error">
+                                        {medicalError}
+                                    </p>
+                                ) : medicalRecords.length === 0 ? (
+                                    <p className="medical-empty">
+                                        No medical records available.
+                                    </p>
+                                ) : (
+                                    <div className="medical-records-list">
+                                        {medicalRecords.map((record) => (
+                                            <div
+                                                className="medical-record-card"
+                                                key={record.id}
+                                            >
+                                                <div className="medical-record-header">
+                                                    <strong>
+                                                        {record.diagnosis}
+                                                    </strong>
+                                                    <span>
+                                                        {new Date(
+                                                            record.visitDate,
+                                                        ).toLocaleDateString(
+                                                            "en-GB",
+                                                        )}
+                                                    </span>
+                                                </div>
+
+                                                <div className="medical-record-details">
+                                                    <div>
+                                                        <span>Treatment</span>
+                                                        <strong>
+                                                            {record.treatment ||
+                                                                "Not specified"}
+                                                        </strong>
+                                                    </div>
+
+                                                    <div>
+                                                        <span>Notes</span>
+                                                        <strong>
+                                                            {record.notes ||
+                                                                "No additional notes"}
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </section>
 
                             <div className="animal-modal-footer">
