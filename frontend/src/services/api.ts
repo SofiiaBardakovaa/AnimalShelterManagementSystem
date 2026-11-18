@@ -37,6 +37,12 @@ export interface AvailableAnimal {
     gender: string;
     arrivalDate: string;
     notes: string | null;
+    shelterName: string;
+}
+
+export interface AdoptersCountResult {
+    region: string;
+    count: number | null;
 }
 
 export interface Adopter {
@@ -104,7 +110,9 @@ export async function createAdoption(data: Adoption): Promise<void> {
 }
 
 // Підрахунок усиновлювачів за регіоном
-export async function getAdoptersCount(region: string) {
+export async function getAdoptersCount(
+    region: string,
+): Promise<AdoptersCountResult> {
     const response = await fetch(
         `${API_URL}/Functions/adopters-count?region=${encodeURIComponent(region)}`,
     );

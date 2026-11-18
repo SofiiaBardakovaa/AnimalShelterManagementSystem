@@ -81,7 +81,8 @@ namespace AnimalShelter.Api.Controllers
                         Breed = reader.IsDBNull(3) ? null : reader.GetString(3),
                         Gender = reader.GetString(4),
                         ArrivalDate = reader.GetDateTime(5),
-                        Notes = reader.IsDBNull(6) ? null : reader.GetString(6)
+                        Notes = reader.IsDBNull(6) ? null : reader.GetString(6),
+                        ShelterName = reader.GetString(7)
                     });
                 }
 

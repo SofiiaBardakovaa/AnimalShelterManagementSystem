@@ -9,5 +9,6 @@ namespace AnimalShelter.Api.Models
         public string Gender { get; set; } = string.Empty;
         public DateTime ArrivalDate { get; set; }
         public string? Notes { get; set; }
+        public string ShelterName { get; set; } = string.Empty;
     }
 }
