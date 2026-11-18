@@ -12,6 +12,7 @@ function Animals({ onAdopt }: AnimalsProps) {
     const [search, setSearch] = useState("");
     const [selectedSpecies, setSelectedSpecies] = useState("All");
     const [selectedStatus, setSelectedStatus] = useState("All");
+    const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
 
     useEffect(() => {
         async function loadAnimals() {
@@ -184,9 +185,9 @@ function Animals({ onAdopt }: AnimalsProps) {
                                     <button
                                         className="animal-card-name"
                                         onClick={() =>
-                                            isAvailable && onAdopt(animal.id)
+                                            setSelectedAnimal(animal)
                                         }
-                                        disabled={!isAvailable}
+                                        type="button"
                                     >
                                         {animal.name}
                                     </button>
@@ -245,6 +246,151 @@ function Animals({ onAdopt }: AnimalsProps) {
                             </div>
                         );
                     })}
+                </div>
+            )}
+
+            {selectedAnimal && (
+                <div
+                    className="animal-modal-overlay"
+                    onClick={() => setSelectedAnimal(null)}
+                >
+                    <div
+                        className="animal-modal"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="animal-modal-header">
+                            <div>
+                                <span className="animal-modal-id">
+                                    ANIMAL #{selectedAnimal.id}
+                                </span>
+                                <h2>{selectedAnimal.name}</h2>
+                                <p>
+                                    {selectedAnimal.breed ||
+                                        selectedAnimal.species}
+                                </p>
+                            </div>
+
+                            <button
+                                type="button"
+                                className="animal-modal-close"
+                                onClick={() => setSelectedAnimal(null)}
+                                aria-label="Close"
+                            >
+                                ×
+                            </button>
+                        </div>
+
+                        <div className="animal-modal-body">
+                            <div className="animal-modal-status">
+                                <span>Status</span>
+                                <strong>{selectedAnimal.status}</strong>
+                            </div>
+
+                            <section className="animal-detail-section">
+                                <h3>Animal Information</h3>
+
+                                <div className="animal-detail-grid">
+                                    <div>
+                                        <span>Animal ID</span>
+                                        <strong>#{selectedAnimal.id}</strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Name</span>
+                                        <strong>{selectedAnimal.name}</strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Species</span>
+                                        <strong>
+                                            {selectedAnimal.species}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Breed</span>
+                                        <strong>
+                                            {selectedAnimal.breed ||
+                                                "Not specified"}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Gender</span>
+                                        <strong>{selectedAnimal.gender}</strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Birth Date</span>
+                                        <strong>
+                                            {selectedAnimal.birthDate
+                                                ? new Date(
+                                                      selectedAnimal.birthDate,
+                                                  ).toLocaleDateString("en-GB")
+                                                : "Not specified"}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Arrival Date</span>
+                                        <strong>
+                                            {new Date(
+                                                selectedAnimal.arrivalDate,
+                                            ).toLocaleDateString("en-GB")}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Shelter ID</span>
+                                        <strong>
+                                            #{selectedAnimal.shelterId}
+                                        </strong>
+                                    </div>
+
+                                    <div className="animal-detail-full">
+                                        <span>Shelter</span>
+                                        <strong>
+                                            {selectedAnimal.shelterName}
+                                        </strong>
+                                    </div>
+
+                                    <div className="animal-detail-full">
+                                        <span>Notes</span>
+                                        <strong>
+                                            {selectedAnimal.notes ||
+                                                "No additional notes"}
+                                        </strong>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <div className="animal-modal-footer">
+                                {selectedAnimal.status.toLowerCase() ===
+                                    "available" ||
+                                selectedAnimal.status.toLowerCase() ===
+                                    "long-term stay" ? (
+                                    <button
+                                        type="button"
+                                        className="adopt-button"
+                                        onClick={() => {
+                                            onAdopt(selectedAnimal.id);
+                                            setSelectedAnimal(null);
+                                        }}
+                                    >
+                                        Adopt this animal
+                                    </button>
+                                ) : null}
+
+                                <button
+                                    type="button"
+                                    className="animal-modal-secondary"
+                                    onClick={() => setSelectedAnimal(null)}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

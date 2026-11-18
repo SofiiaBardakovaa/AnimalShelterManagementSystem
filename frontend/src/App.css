@@ -969,3 +969,293 @@
     color: #405348;
     font-weight: 700;
 }
+
+/* Adoption page sections */
+
+.adoption-section-heading {
+    margin: 28px 0 20px;
+}
+
+.adoption-section-heading h2 {
+    color: #203c32;
+    font-size: 22px;
+    margin: 0 0 7px;
+}
+
+.adoption-section-heading p {
+    color: #87948c;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Adoption records */
+
+.adoption-records-section {
+    margin-top: 30px;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e8ece9;
+    border-radius: 13px;
+}
+
+.adoption-records-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.adoption-records-heading h3 {
+    color: #203c32;
+    font-size: 18px;
+    margin: 0 0 6px;
+}
+
+.adoption-records-heading p {
+    color: #87948c;
+    font-size: 13px;
+    margin: 0;
+}
+
+.refresh-adoptions-button {
+    padding: 9px 15px;
+    border: 1px solid #dfe8e1;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #34734e;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.refresh-adoptions-button:hover {
+    background: #edf4ee;
+}
+
+.refresh-adoptions-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.adoption-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.adoption-records-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.adoption-records-table th {
+    padding: 13px 12px;
+    background: #f8faf8;
+    color: #87948c;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.adoption-records-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #edf0ed;
+    color: #53645a;
+    white-space: nowrap;
+}
+
+.adoption-records-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.adoption-records-table tbody tr:hover {
+    background: #fafcfb;
+}
+
+.adoption-records-table .adoption-animal-name {
+    color: #203c32;
+    font-weight: 600;
+}
+
+.adoption-records-table .adoption-fee {
+    color: #34734e;
+    font-weight: 600;
+}
+
+.adoption-records-message {
+    padding: 25px 10px;
+    color: #87948c;
+    font-size: 13px;
+    text-align: center;
+}
+
+.adoption-records-count {
+    margin: 15px 0 0;
+    color: #87948c;
+    font-size: 12px;
+}
+
+@media (max-width: 650px) {
+    .adoption-records-section {
+        padding: 16px;
+    }
+
+    .adoption-records-heading {
+        align-items: flex-start;
+    }
+}
+
+/* Animal details modal */
+
+.animal-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(22, 43, 34, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+}
+
+.animal-modal {
+    background: #ffffff;
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.animal-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 28px 30px;
+    border-bottom: 1px solid #edf0ed;
+}
+
+.animal-modal-id {
+    color: #6c987d;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.animal-modal-header h2 {
+    color: #203c32;
+    font-size: 26px;
+    margin: 8px 0 5px;
+}
+
+.animal-modal-header p {
+    color: #87948c;
+    margin: 0;
+    font-size: 14px;
+}
+
+.animal-modal-close {
+    border: none;
+    background: #f3f6f3;
+    color: #496354;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.animal-modal-body {
+    padding: 25px 30px 30px;
+}
+
+.animal-modal-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f3f8f4;
+    padding: 13px 16px;
+    border-radius: 9px;
+    margin-bottom: 25px;
+    color: #53645a;
+    font-size: 13px;
+}
+
+.animal-modal-status strong {
+    color: #34734e;
+}
+
+.animal-detail-section h3 {
+    color: #203c32;
+    font-size: 17px;
+    margin: 0 0 18px;
+}
+
+.animal-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.animal-detail-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.animal-detail-grid span {
+    color: #87948c;
+    font-size: 12px;
+}
+
+.animal-detail-grid strong {
+    color: #30483b;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.animal-detail-grid .animal-detail-full {
+    grid-column: 1 / -1;
+}
+
+.animal-modal-footer {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #edf0ed;
+}
+
+.animal-modal-secondary {
+    padding: 11px 20px;
+    border: 1px solid #dfe8e1;
+    background: #ffffff;
+    color: #496354;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.animal-modal-secondary:hover {
+    background: #f5f8f5;
+}
+
+@media (max-width: 600px) {
+    .animal-modal-header,
+    .animal-modal-body {
+        padding: 20px;
+    }
+
+    .animal-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .animal-detail-grid .animal-detail-full {
+        grid-column: auto;
+    }
+}
