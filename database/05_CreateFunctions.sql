@@ -13,8 +13,10 @@ RETURN
         a.breed AS Breed,
         a.gender AS Gender,
         a.arrival_date AS ArrivalDate,
-        a.notes AS Notes
+        a.notes AS Notes,
+        s.name AS ShelterName
     FROM Animals a
+    INNER JOIN Shelters s ON s.id = a.shelter_id
     WHERE
         @ShelterId IS NOT NULL
         AND @ShelterId > 0

@@ -1,15 +1,6 @@
 USE AnimalShelterDB;
 GO
 
-IF EXISTS (
-	SELECT * FROM sys.objects
-	WHERE object_id = OBJECT_ID(N'[dbo].[usp_insert_adoption]') 
-	AND type IN (N'P', N'PC')
-)
-
-DROP PROCEDURE dbo.usp_insert_adoption;
-GO
-
 CREATE OR ALTER PROCEDURE usp_insert_adoption
 	@AnimalId INT,
 	@AdopterId INT,
