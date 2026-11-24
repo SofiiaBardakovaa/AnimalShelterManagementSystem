@@ -6,16 +6,16 @@ The application follows the REST architectural style and uses Microsoft SQL Serv
 
 ## Features
 
-- **Dashboard** — displays key statistics about animals, shelters, and adoptions.
-- **Animals** — displays animal information using cards and supports searching and filtering by species and adoption status.
-- **Adopters** — displays registered adopters and their contact information.
-- **Adoptions** — allows users to register new adoptions and view adoption records.
-- **Medical Records** — displays medical information associated with animals.
-- **Additional Features** — provides an interface for executing database functions:
+- **Dashboard** - displays key statistics about animals, shelters, and adoptions.
+- **Animals** - displays animal information using cards and supports searching and filtering by species and adoption status.
+- **Adopters** - displays registered adopters and their contact information.
+- **Adoptions** - allows users to register new adoptions and view adoption records.
+- **Medical Records** - displays medical information associated with animals.
+- **Additional Features** - provides an interface for executing database functions:
     - Count adopters by region using a scalar-valued function.
     - Retrieve available animals by shelter using a table-valued function.
-- **REST API** — connects the frontend to the SQL Server database through HTTP requests.
-- **Error Handling** — handles SQL Server exceptions and displays error messages in the application.
+- **REST API** - connects the frontend to the SQL Server database through HTTP requests.
+- **Error Handling** - handles SQL Server exceptions and displays error messages in the application.
 
 ## Technologies
 
