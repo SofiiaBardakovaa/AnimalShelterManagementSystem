@@ -52,6 +52,7 @@ namespace AnimalShelter.Api.Controllers
             }
         }
         // Таблична функція: доступні для усиновлення тварини
+        
         [HttpGet("available-animals/{shelterId}")]
         public async Task<IActionResult> GetAvailableAnimals(int shelterId)
         {
@@ -60,6 +61,27 @@ namespace AnimalShelter.Api.Controllers
                 using var connection = _connectionFactory.CreateConnection();
                 await connection.OpenAsync();
 
+                // Перевіряємо, чи існує притулок
+                using var checkCommand = new SqlCommand(
+                    "SELECT COUNT(*) FROM Shelters WHERE id = @ShelterId",
+                    connection);
+
+                checkCommand.Parameters.Add("@ShelterId", SqlDbType.Int)
+                    .Value = shelterId;
+
+                var shelterExists = Convert.ToInt32(
+                    await checkCommand.ExecuteScalarAsync()
+                );
+
+                if (shelterExists == 0)
+                {
+                    return NotFound(new
+                    {
+                    message = "Shelter with this ID does not exist."
+                    });
+                }
+
+                // Викликаємо табличну функцію
                 using var command = new SqlCommand(
                     "SELECT * FROM dbo.fn_GetAvailableAnimalsByShelter(@ShelterId)",
                     connection);

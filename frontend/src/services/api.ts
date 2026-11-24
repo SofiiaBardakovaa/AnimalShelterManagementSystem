@@ -125,6 +125,7 @@ export async function getAdoptersCount(
 }
 
 // Отримання доступних тварин у притулку
+
 export async function getAvailableAnimals(
     shelterId: number,
 ): Promise<AvailableAnimal[]> {
@@ -133,7 +134,22 @@ export async function getAvailableAnimals(
     );
 
     if (!response.ok) {
-        throw new Error("Failed to load available animals");
+        const errorText = await response.text();
+
+        let errorMessage = errorText || "Failed to load available animals";
+
+        try {
+            const errorData = JSON.parse(errorText);
+            errorMessage =
+                errorData.message ||
+                errorData.error ||
+                errorData.title ||
+                errorMessage;
+        } catch {
+            // Response is not JSON, use the original text
+        }
+
+        throw new Error(errorMessage);
     }
 
     return response.json();
